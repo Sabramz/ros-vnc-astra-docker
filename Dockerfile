@@ -1,4 +1,7 @@
 FROM ros:noetic-robot
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
 RUN apt-get update -y && \
   apt-get install -y tigervnc-standalone-server openbox wget && \
   rm -rf /var/lib/apt/lists
@@ -21,6 +24,12 @@ RUN sudo apt-get install -y libusb-1.0-0-dev
 RUN cmake .. && make -j4
 RUN sudo make install
 RUN sudo ldconfig
+RUN sudo apt-get install -y rviz
+WORKDIR /
+RUN source ./ros_entrypoint.sh
 WORKDIR /root
-
+RUN mkdir -p ros_ws/src
+WORKDIR ./ros_ws/src
+RUN git clone https://github.com/orbbec/ros_astra_camera.git
+WORKDIR ..
 CMD /app/main.sh
