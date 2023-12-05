@@ -32,4 +32,5 @@ RUN mkdir -p ros_ws/src
 WORKDIR ./ros_ws/src
 RUN git clone https://github.com/orbbec/ros_astra_camera.git
 WORKDIR ..
+RUN source /opt/ros/noetic/setup.bash && catkin_make
 CMD /app/main.sh
