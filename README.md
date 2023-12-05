@@ -1,6 +1,6 @@
 RUN THESE COMMANDS IN YOUR TERMINAL IN THIS DIRECTORY
 
-docker build -tag astra .
+docker build -t astra .
 
 ! Set a source container for your volume mount.
 
